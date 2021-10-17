@@ -1,5 +1,6 @@
 package io.github.fallOut015.fashion_forward;
 
+import io.github.fallOut015.fashion_forward.world.item.ItemsFashionForward;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +23,8 @@ public class MainFashionForward {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        ItemsFashionForward.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
