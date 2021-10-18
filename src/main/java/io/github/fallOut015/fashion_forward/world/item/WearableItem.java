@@ -1,5 +1,6 @@
 package io.github.fallOut015.fashion_forward.world.item;
 
+import net.minecraft.client.gui.screens.inventory.LoomScreen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
@@ -10,6 +11,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import javax.annotation.Nullable;
 
@@ -97,6 +100,45 @@ public class WearableItem extends Item {
             case RED -> 11546150;
             case BLACK -> 1908001;
         };
+    }
+    @Nullable
+    public static DyeColor getDyeFromWool(Item item) {
+        Block block = ((BlockItem) item).getBlock();
+        if(block.equals(Blocks.WHITE_WOOL)) {
+            return DyeColor.WHITE;
+        } else if(block.equals(Blocks.ORANGE_WOOL)) {
+            return DyeColor.ORANGE;
+        } else if(block.equals(Blocks.MAGENTA_WOOL)) {
+            return DyeColor.MAGENTA;
+        } else if(block.equals(Blocks.LIGHT_BLUE_WOOL)) {
+            return DyeColor.LIGHT_BLUE;
+        } else if(block.equals(Blocks.YELLOW_WOOL)) {
+            return DyeColor.YELLOW;
+        } else if(block.equals(Blocks.LIME_WOOL)) {
+            return DyeColor.LIME;
+        } else if(block.equals(Blocks.PINK_WOOL)) {
+            return DyeColor.PINK;
+        } else if(block.equals(Blocks.GRAY_WOOL)) {
+            return DyeColor.GRAY;
+        } else if(block.equals(Blocks.LIGHT_GRAY_WOOL)) {
+            return DyeColor.LIGHT_GRAY;
+        } else if(block.equals(Blocks.CYAN_WOOL)) {
+            return DyeColor.CYAN;
+        } else if(block.equals(Blocks.PURPLE_WOOL)) {
+            return DyeColor.PURPLE;
+        } else if(block.equals(Blocks.BLUE_WOOL)) {
+            return DyeColor.BLUE;
+        } else if(block.equals(Blocks.BROWN_WOOL)) {
+            return DyeColor.BROWN;
+        } else if(block.equals(Blocks.GREEN_WOOL)) {
+            return DyeColor.GREEN;
+        } else if(block.equals(Blocks.RED_WOOL)) {
+            return DyeColor.RED;
+        } else if(block.equals(Blocks.BLACK_WOOL)) {
+            return DyeColor.BLACK;
+        } else {
+            return null;
+        }
     }
 }
 

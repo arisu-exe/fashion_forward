@@ -1,6 +1,9 @@
 {
   "itemGroup.fashion" : "Fashion",
 
+  "container.sewing_table" : "Sewing Table",
+  "container.dying_station" : "Dying Station",
+
   "block.fashion_forward.sewing_table" : "Sewing Table",
   "block.fashion_forward.dying_station" : "Dying Station",
 

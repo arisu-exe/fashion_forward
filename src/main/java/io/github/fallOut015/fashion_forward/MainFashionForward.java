@@ -1,5 +1,6 @@
 package io.github.fallOut015.fashion_forward;
 
+import io.github.fallOut015.fashion_forward.sounds.SoundEventsFashionForward;
 import io.github.fallOut015.fashion_forward.world.item.ItemsFashionForward;
 import io.github.fallOut015.fashion_forward.world.level.block.BlocksFashionForward;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,6 +28,7 @@ public class MainFashionForward {
 
         BlocksFashionForward.register(FMLJavaModLoadingContext.get().getModEventBus());
         ItemsFashionForward.register(FMLJavaModLoadingContext.get().getModEventBus());
+        SoundEventsFashionForward.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
