@@ -1,0 +1,28 @@
+{
+  "parent": "fashion_forward:fashion/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:blue_dye"
+    },
+    "title": {
+      "translate": "advancements.fashion.dye_item.title"
+    },
+    "description": {
+      "translate": "advancements.fashion.dye_item.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "item_with_dye": {
+
+    }
+  },
+  "requirements": [
+    [
+      "item_with_dye"
+    ]
+  ]
+}

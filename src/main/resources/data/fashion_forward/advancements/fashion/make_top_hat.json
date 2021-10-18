@@ -1,0 +1,39 @@
+{
+  "parent": "fashion_forward:fashion/root",
+  "display": {
+    "icon": {
+      "item": "fashion_forward:top_hat",
+      "nbt" : "{\"data\":{\"0\":15,\"1\":0,\"2\":15}}"
+    },
+    "title": {
+      "translate": "advancements.fashion.make_top_hat.title"
+    },
+    "description": {
+      "translate": "advancements.fashion.make_top_hat.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "top_hat": {
+      "trigger" : "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fashion_forward:top_hat"
+            ],
+            "nbt" : "{\"data\":{\"0\":15,\"1\":0,\"2\":15}}"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "top_hat"
+    ]
+  ]
+}

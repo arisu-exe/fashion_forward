@@ -17,9 +17,7 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.BannerPatternItem;
-import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BannerPattern;
@@ -113,6 +111,12 @@ public class SewingTableMenu extends AbstractContainerMenu {
     }
 
     public void slotsChanged(Container container) { // TODO
+        for(int i = SewingPatterns.values()[this.selectedSewingTablePatternIndex.get()].get().getPatternSlots(); i < this.inputSlots.length; ++ i) {
+            if(this.inputSlots[i].hasItem()) {
+                // pop item back into player inventory
+            }
+        }
+
         ItemStack itemstack = this.bannerSlot.getItem();
         ItemStack itemstack1 = this.dyeSlot.getItem();
         ItemStack itemstack2 = this.patternSlot.getItem();
@@ -140,39 +144,30 @@ public class SewingTableMenu extends AbstractContainerMenu {
         this.slotUpdateListener = slotUpdateListener;
     }
 
-    public ItemStack quickMoveStack(Player player, int index) { // TODO
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if (index == this.resultSlot.index) {
-                if (!this.moveItemStackTo(itemstack1, 4, 40, true)) {
+            if (index == 0) {
+                this.access.execute((level, blockPos) -> itemstack1.getItem().onCraftedBy(itemstack1, level, player));
+                if (!this.moveItemStackTo(itemstack1, 10, 46, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemstack1, itemstack);
-            } else if (index != this.dyeSlot.index && index != this.bannerSlot.index && index != this.patternSlot.index) {
-                if (itemstack1.getItem() instanceof BannerItem) {
-                    if (!this.moveItemStackTo(itemstack1, this.bannerSlot.index, this.bannerSlot.index + 1, false)) {
+            } else if (index >= 10 && index < 46) {
+                if (!this.moveItemStackTo(itemstack1, 1, 10, false)) {
+                    if (index < 37) {
+                        if (!this.moveItemStackTo(itemstack1, 37, 46, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    } else if (!this.moveItemStackTo(itemstack1, 10, 37, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (itemstack1.getItem() instanceof DyeItem) {
-                    if (!this.moveItemStackTo(itemstack1, this.dyeSlot.index, this.dyeSlot.index + 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (itemstack1.getItem() instanceof BannerPatternItem) {
-                    if (!this.moveItemStackTo(itemstack1, this.patternSlot.index, this.patternSlot.index + 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index >= 4 && index < 31) {
-                    if (!this.moveItemStackTo(itemstack1, 31, 40, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (index >= 31 && index < 40 && !this.moveItemStackTo(itemstack1, 4, 31, false)) {
-                    return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 4, 40, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 10, 46, false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -187,6 +182,9 @@ public class SewingTableMenu extends AbstractContainerMenu {
             }
 
             slot.onTake(player, itemstack1);
+            if (index == 0) {
+                player.drop(itemstack1, false);
+            }
         }
 
         return itemstack;

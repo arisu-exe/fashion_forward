@@ -1,12 +1,38 @@
 {
   "itemGroup.fashion" : "Fashion",
 
+
+
   "container.sewing_table" : "Sewing Table",
   "container.dying_station" : "Dying Station",
+
+
 
   "block.fashion_forward.sewing_table" : "Sewing Table",
   "block.fashion_forward.dying_station" : "Dying Station",
 
+
+
   "item.fashion_forward.top_hat" : "Top Hat",
-  "item.fashion_forward.headphones" : "Headphones"
+  "item.fashion_forward.headphones" : "Headphones",
+
+
+
+  "advancements.fashion.root.title" : "Sew nice to meet you!",
+  "advancements.fashion.root.description" : "Enter the world of fashion",
+
+  "advancements.fashion.make_top_hat.title" : "Lookin' fine",
+  "advancements.fashion.make_top_hat.description" : "Sew an upmost exquisite top hat",
+
+  "advancements.fashion.make_headphones.title" : "By Dre",
+  "advancements.fashion.make_headphones.description" : "Make a pair of all black headphones",
+
+  "advancements.fashion.rainbow_clothes.title" : "Colorful outfit",
+  "advancements.fashion.rainbow_clothes.description" : "Make an outfit with all 16 dye colors!",
+
+  "advancements.fashion.dye_item.title" : "Dying to add color",
+  "advancements.fashion.dye_item.description" : "Give a piece of clothing a custom design",
+
+  "advancements.fashion.dye_creeper_face.title" : "Hiss...",
+  "advancements.fashion.dye_creeper_face.description" : "Create a Creeper face design"
 }
