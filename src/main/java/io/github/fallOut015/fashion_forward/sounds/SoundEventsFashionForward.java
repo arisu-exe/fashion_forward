@@ -11,8 +11,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class SoundEventsFashionForward {
     private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MainFashionForward.MODID);
 
-    public static final RegistryObject<SoundEvent> UI_SEWING_TABLE_SELECT_PATTERN = SOUND_EVENTS.register("ui.loom.select_pattern", () -> new SoundEvent(new ResourceLocation(MainFashionForward.MODID, "ui.loom.select_pattern")));
-    public static final RegistryObject<SoundEvent> UI_SEWING_TABLE_TAKE_RESULT = SOUND_EVENTS.register("ui.loom.take_result", () -> new SoundEvent(new ResourceLocation(MainFashionForward.MODID, "ui.loom.take_result")));
+    public static final RegistryObject<SoundEvent> UI_SEWING_TABLE_SELECT_PATTERN = SOUND_EVENTS.register("ui.sewing_table.select_pattern", () -> new SoundEvent(new ResourceLocation(MainFashionForward.MODID, "ui.sewing_table.select_pattern")));
+    public static final RegistryObject<SoundEvent> UI_SEWING_TABLE_TAKE_RESULT = SOUND_EVENTS.register("ui.sewing_table.take_result", () -> new SoundEvent(new ResourceLocation(MainFashionForward.MODID, "ui.sewing_table.take_result")));
+    public static final RegistryObject<SoundEvent> UI_DYING_STATION_TAKE_RESULT = SOUND_EVENTS.register("ui.dying_station.take_result", () -> new SoundEvent(new ResourceLocation(MainFashionForward.MODID, "ui.dying_station.take_result")));
 
     public static void register(IEventBus bus) {
         SOUND_EVENTS.register(bus);

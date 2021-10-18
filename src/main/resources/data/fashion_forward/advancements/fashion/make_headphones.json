@@ -1,5 +1,5 @@
 {
-  "parent": "fashion_forward:fashion/root",
+  "parent": "fashion_forward:fashion/make_item",
   "display": {
     "icon": {
       "item": "fashion_forward:headphones",

@@ -18,8 +18,11 @@
 
 
 
-  "advancements.fashion.root.title" : "Sew nice to meet you!",
+  "advancements.fashion.root.title" : "Fashion",
   "advancements.fashion.root.description" : "Enter the world of fashion",
+
+  "advancements.fashion.make_item.title" : "Sew nice to meet you!",
+  "advancements.fashion.make_item.description" : "Sew your first piece of clothing!",
 
   "advancements.fashion.make_top_hat.title" : "Lookin' fine",
   "advancements.fashion.make_top_hat.description" : "Sew an upmost exquisite top hat",

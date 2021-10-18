@@ -4,7 +4,6 @@ import io.github.fallOut015.fashion_forward.sounds.SoundEventsFashionForward;
 import io.github.fallOut015.fashion_forward.world.item.ItemsFashionForward;
 import io.github.fallOut015.fashion_forward.world.item.WearableItem;
 import io.github.fallOut015.fashion_forward.world.level.block.BlocksFashionForward;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.LazyLoadedValue;
@@ -17,10 +16,8 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.BannerPatternItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BannerPattern;
 
 import java.util.function.Supplier;
 
@@ -50,24 +47,29 @@ public class SewingTableMenu extends AbstractContainerMenu {
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
     public SewingTableMenu(int containerId, Inventory inventory, final ContainerLevelAccess containerLevelAccess) {
-        super(MenuType.LOOM, containerId);
+        super(ContainersFashionForward.SEWING_TABLE.get(), containerId);
         this.access = containerLevelAccess;
-        this.inputSlots = new Slot[4];
+        this.inputSlots = new Slot[this.inputContainer.getContainerSize()];
         for(int i = 0; i < this.inputSlots.length; ++ i) {
-            this.inputSlots[i] = this.addSlot(new Slot(this.inputContainer, 0, 13, 26 + i * 24) {
+            int finalI = i;
+            this.inputSlots[i] = this.addSlot(new Slot(this.inputContainer, 0, 13 + (finalI % 2) * 20, 26 + ((finalI / 2) % 2) * 19) {
                 public boolean mayPlace(ItemStack itemStack) {
-                    return itemStack.is(ItemTags.WOOL);
+                    return itemStack.is(ItemTags.WOOL) && finalI < SewingTableMenu.this.getNumSlots();
+                }
+                @Override
+                public boolean isActive() {
+                    return finalI < SewingTableMenu.this.getNumSlots();
                 }
             });
         }
 
         this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 143, 58) {
-            public boolean mayPlace(ItemStack p_39950_) {
+            public boolean mayPlace(ItemStack itemStack) {
                 return false;
             }
 
             public void onTake(Player player, ItemStack itemStack) {
-                for(int i = 0; i < SewingPatterns.values()[SewingTableMenu.this.selectedSewingTablePatternIndex.get()].get().getPatternSlots(); ++ i) {
+                for(int i = 0; i < SewingTableMenu.this.getNumSlots(); ++ i) {
                     SewingTableMenu.this.inputSlots[i].remove(1);
                 }
 
@@ -111,13 +113,15 @@ public class SewingTableMenu extends AbstractContainerMenu {
     }
 
     public void slotsChanged(Container container) { // TODO
-        for(int i = SewingPatterns.values()[this.selectedSewingTablePatternIndex.get()].get().getPatternSlots(); i < this.inputSlots.length; ++ i) {
+        for(int i = this.getNumSlots(); i < this.inputSlots.length; ++ i) {
             if(this.inputSlots[i].hasItem()) {
                 // pop item back into player inventory
             }
         }
+        this.setupResultSlot();
+        this.broadcastChanges();
 
-        ItemStack itemstack = this.bannerSlot.getItem();
+        /*ItemStack itemstack = this.bannerSlot.getItem();
         ItemStack itemstack1 = this.dyeSlot.getItem();
         ItemStack itemstack2 = this.patternSlot.getItem();
         ItemStack itemstack3 = this.resultSlot.getItem();
@@ -137,7 +141,7 @@ public class SewingTableMenu extends AbstractContainerMenu {
         }
 
         this.setupResultSlot();
-        this.broadcastChanges();
+        this.broadcastChanges();*/
     }
 
     public void registerUpdateListener(Runnable slotUpdateListener) {
@@ -200,12 +204,28 @@ public class SewingTableMenu extends AbstractContainerMenu {
             WearableItem wearableItem = SewingPatterns.values()[this.selectedSewingTablePatternIndex.get()].get();
             ItemStack resultStack = new ItemStack(wearableItem);
             for(int i = 0; i < wearableItem.getPatternSlots(); ++ i) {
+                if(!this.inputSlots[i].hasItem()) {
+                    break;
+                }
                 WearableItem.setColor(resultStack, i, WearableItem.getDyeFromWool(this.inputSlots[i].getItem().getItem()));
             }
             if(!ItemStack.matches(resultStack, this.resultSlot.getItem())) {
                 this.resultSlot.set(resultStack);
             }
         }
+    }
+
+    public Slot[] getInputSlots() {
+        return this.inputSlots;
+    }
+    public int getNumSlots() {
+        return SewingPatterns.values()[this.getSelectedPatternIndex()].get().getPatternSlots();
+    }
+    public Slot getResultSlot() {
+        return this.resultSlot;
+    }
+    public int getSelectedPatternIndex() {
+        return this.selectedSewingTablePatternIndex.get();
     }
 
     public enum SewingPatterns {
