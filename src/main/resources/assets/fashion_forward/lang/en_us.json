@@ -1,6 +1,9 @@
 {
   "itemGroup.fashion_forward" : "Fashion Forward",
 
+  "block.fashion_forward.sewing_table" : "Sewing Table",
+  "block.fashion_forward.dying_station" : "Dying Station",
+
   "item.fashion_forward.top_hat" : "Top Hat",
   "item.fashion_forward.headphones" : "Headphones"
 }

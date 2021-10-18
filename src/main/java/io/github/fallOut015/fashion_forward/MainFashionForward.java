@@ -1,6 +1,7 @@
 package io.github.fallOut015.fashion_forward;
 
 import io.github.fallOut015.fashion_forward.world.item.ItemsFashionForward;
+import io.github.fallOut015.fashion_forward.world.level.block.BlocksFashionForward;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,6 +25,7 @@ public class MainFashionForward {
 
         MinecraftForge.EVENT_BUS.register(this);
 
+        BlocksFashionForward.register(FMLJavaModLoadingContext.get().getModEventBus());
         ItemsFashionForward.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 

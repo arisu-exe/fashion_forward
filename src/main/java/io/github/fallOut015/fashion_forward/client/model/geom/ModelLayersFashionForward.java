@@ -54,7 +54,7 @@ public class ModelLayersFashionForward {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition bone = partdefinition.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offset(0.0F, -24.0F, 0.0F));
         bone.addOrReplaceChild("top", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -41.0F, -4.0F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
         bone.addOrReplaceChild("line", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -34.0F, -4.0F, 8.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
         bone.addOrReplaceChild("brim", CubeListBuilder.create().texOffs(0, 15).addBox(-6.0F, -33.0F, -6.0F, 12.0F, 1.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));

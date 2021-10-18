@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "fashion_forward:block/sewing_table_front",
+    "north": "fashion_forward:block/sewing_table_front",
+    "south": "fashion_forward:block/sewing_table_side",
+    "east": "fashion_forward:block/sewing_table_front",
+    "west": "fashion_forward:block/sewing_table_side",
+    "up": "fashion_forward:block/sewing_table_top",
+    "down": "minecraft:block/oak_planks"
+  }
+}
