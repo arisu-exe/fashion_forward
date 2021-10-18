@@ -5,7 +5,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 
 public class CreativeModeTabFashionForward {
-    public static final CreativeModeTab TAB_FASHION_FORWARD = new CreativeModeTab("fashion_forward") {
+    public static final CreativeModeTab TAB_FASHION = new CreativeModeTab("fashion") {
         public ItemStack makeIcon() {
             ItemStack topHat = new ItemStack(ItemsFashionForward.TOP_HAT.get());
             WearableItem.setColor(topHat, 0, DyeColor.BLACK);
