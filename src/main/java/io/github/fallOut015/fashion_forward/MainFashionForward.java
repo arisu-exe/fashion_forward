@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(MainFashionForward.MODID)
 public class MainFashionForward {
     public static final String MODID = "fashion_forward";
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public MainFashionForward() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -36,9 +36,5 @@ public class MainFashionForward {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-    }
-
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
     }
 }

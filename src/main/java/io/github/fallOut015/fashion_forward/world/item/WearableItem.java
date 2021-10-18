@@ -1,27 +1,27 @@
 package io.github.fallOut015.fashion_forward.world.item;
 
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
 public class WearableItem extends Item {
     EquipmentSlot equipmentSlot;
-    int patternSlots;
+    DyeColor[] defaultColors;
 
-    public WearableItem(EquipmentSlot equipmentSlot, int patternSlots, Properties properties) {
+    public WearableItem(EquipmentSlot equipmentSlot, DyeColor[] defaultColors, Properties properties) {
         super(properties);
 
         this.equipmentSlot = equipmentSlot;
-        this.patternSlots = patternSlots;
+        this.defaultColors = defaultColors;
     }
 
     @Nullable
@@ -46,20 +46,37 @@ public class WearableItem extends Item {
             return InteractionResultHolder.fail(itemstack);
         }
     }
-
-    public static void applyColor(ItemStack itemStack, DyeColor dyeColor, int i) {
-        String data = itemStack.getOrCreateTag().getString("data");
-        // format as so
-        /*
-        0:0,1:1,2:4,D:FORMATTED_DESIGN_STRING
-         */
-        itemStack.getOrCreateTag().putString("data", data);
+    @Override
+    public void fillItemCategory(CreativeModeTab creativeModeTab, NonNullList<ItemStack> itemStacks) {
+        if(this.allowdedIn(creativeModeTab)) {
+            ItemStack itemStack = new ItemStack(this);
+            for(int i = 0; i < this.defaultColors.length; ++ i) {
+                WearableItem.setColor(itemStack, i, this.defaultColors[i]);
+            }
+            itemStacks.add(itemStack);
+        }
     }
-    public static DyeColor getColor(ItemStack itemStack, int i) {
-        String data = itemStack.getOrCreateTag().getString("data");
-        // read data and retrieve number from index i
-        int dci = 5;
-        return DyeColor.byId(dci);
+
+    public int getPatternSlots() {
+        return this.defaultColors.length;
+    }
+    public EquipmentSlot getEquipmentSlot() {
+        return this.equipmentSlot;
+    }
+
+    public static void setColor(ItemStack itemStack, int tintIndex, DyeColor dyeColor) {
+        CompoundTag data;
+        if(itemStack.getOrCreateTag().contains("data")) {
+            data = (CompoundTag) itemStack.getOrCreateTag().get("data");
+        } else {
+            data = new CompoundTag();
+        }
+        data.putInt(String.valueOf(tintIndex), dyeColor.getId());
+        itemStack.getOrCreateTag().put("data", data);
+    }
+    public static DyeColor getColor(ItemStack itemStack, int tintIndex) {
+        CompoundTag data = (CompoundTag) itemStack.getOrCreateTag().get("data");
+        return DyeColor.byId(data.getInt(String.valueOf(tintIndex)));
     }
 }
 

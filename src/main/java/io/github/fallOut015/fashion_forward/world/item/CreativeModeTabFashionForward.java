@@ -8,9 +8,9 @@ public class CreativeModeTabFashionForward {
     public static final CreativeModeTab TAB_FASHION_FORWARD = new CreativeModeTab("fashion_forward") {
         public ItemStack makeIcon() {
             ItemStack topHat = new ItemStack(ItemsFashionForward.TOP_HAT.get());
-            WearableItem.applyDye(topHat, DyeColor.BLACK, 0);
-            WearableItem.applyDye(topHat, DyeColor.WHITE, 1);
-            WearableItem.applyDye(topHat, DyeColor.BLACK, 2);
+            WearableItem.setColor(topHat, 0, DyeColor.BLACK);
+            WearableItem.setColor(topHat, 1, DyeColor.WHITE);
+            WearableItem.setColor(topHat, 2, DyeColor.BLACK);
             return topHat;
         }
     };

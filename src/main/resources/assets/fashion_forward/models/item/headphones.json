@@ -1,0 +1,8 @@
+{
+  "parent" : "minecraft:item/generated",
+  "textures" : {
+    "layer0" : "fashion_forward:item/headphones_right",
+    "layer1" : "fashion_forward:item/headphones_band",
+    "layer2" : "fashion_forward:item/headphones_left"
+  }
+}
