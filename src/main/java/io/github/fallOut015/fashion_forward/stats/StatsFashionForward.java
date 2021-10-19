@@ -7,7 +7,7 @@ import net.minecraft.stats.Stats;
 
 public class StatsFashionForward {
     public static final ResourceLocation INTERACT_WITH_SEWING_TABLE = makeCustomStat("interact_with_sewing_table", StatFormatter.DEFAULT);
-    public static final ResourceLocation INTERACT_WITH_DYING_STATION = makeCustomStat("interact_with_dying_station", StatFormatter.DEFAULT);
+    public static final ResourceLocation INTERACT_WITH_DYEING_STATION = makeCustomStat("interact_with_dying_station", StatFormatter.DEFAULT);
 
     private static ResourceLocation makeCustomStat(String id, StatFormatter statFormatter) {
         ResourceLocation resourcelocation = new ResourceLocation(id);

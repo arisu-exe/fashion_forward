@@ -13,7 +13,7 @@ public class ContainersFashionForward {
 
 
     public static final RegistryObject<MenuType<SewingTableMenu>> SEWING_TABLE = CONTAINERS.register("sewing_table", () -> new MenuType<>(SewingTableMenu::new));
-    public static final RegistryObject<MenuType<DyingStationMenu>> DYING_STATION = CONTAINERS.register("dying_station", () -> new MenuType<>(DyingStationMenu::new));
+    public static final RegistryObject<MenuType<DyeingStationMenu>> DYEING_STATION = CONTAINERS.register("dyeing_station", () -> new MenuType<>(DyeingStationMenu::new));
 
 
 

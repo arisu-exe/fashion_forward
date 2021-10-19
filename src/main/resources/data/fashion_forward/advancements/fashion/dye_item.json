@@ -17,7 +17,14 @@
   },
   "criteria": {
     "item_with_dye": {
-
+      "trigger" : "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "nbt" : "{\"data\":{\"design\":\"\"}}"
+          }
+        ]
+      }
     }
   },
   "requirements": [

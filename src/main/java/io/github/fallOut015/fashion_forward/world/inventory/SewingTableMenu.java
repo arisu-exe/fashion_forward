@@ -1,6 +1,7 @@
 package io.github.fallOut015.fashion_forward.world.inventory;
 
 import io.github.fallOut015.fashion_forward.sounds.SoundEventsFashionForward;
+import io.github.fallOut015.fashion_forward.tags.ItemTagsFashionForward;
 import io.github.fallOut015.fashion_forward.world.item.ItemsFashionForward;
 import io.github.fallOut015.fashion_forward.world.item.WearableItem;
 import io.github.fallOut015.fashion_forward.world.level.block.BlocksFashionForward;
@@ -52,9 +53,10 @@ public class SewingTableMenu extends AbstractContainerMenu {
         this.inputSlots = new Slot[this.inputContainer.getContainerSize()];
         for(int i = 0; i < this.inputSlots.length; ++ i) {
             int finalI = i;
-            this.inputSlots[i] = this.addSlot(new Slot(this.inputContainer, 0, 13 + (finalI % 2) * 20, 26 + ((finalI / 2) % 2) * 19) {
+            this.inputSlots[i] = this.addSlot(new Slot(this.inputContainer, i, 13 + (finalI % 2) * 20, 26 + ((finalI / 2) % 2) * 19) {
+                @Override
                 public boolean mayPlace(ItemStack itemStack) {
-                    return itemStack.is(ItemTags.WOOL) && finalI < SewingTableMenu.this.getNumSlots();
+                    return itemStack.is(ItemTagsFashionForward.FABRIC) && finalI < SewingTableMenu.this.getNumSlots();
                 }
                 @Override
                 public boolean isActive() {
@@ -64,10 +66,11 @@ public class SewingTableMenu extends AbstractContainerMenu {
         }
 
         this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 143, 58) {
+            @Override
             public boolean mayPlace(ItemStack itemStack) {
                 return false;
             }
-
+            @Override
             public void onTake(Player player, ItemStack itemStack) {
                 for(int i = 0; i < SewingTableMenu.this.getNumSlots(); ++ i) {
                     SewingTableMenu.this.inputSlots[i].remove(1);

@@ -4,12 +4,12 @@
 
 
   "container.sewing_table" : "Sewing Table",
-  "container.dying_station" : "Dying Station",
+  "container.dyeing_station" : "Dyeing Station",
 
 
 
   "block.fashion_forward.sewing_table" : "Sewing Table",
-  "block.fashion_forward.dying_station" : "Dying Station",
+  "block.fashion_forward.dyeing_station" : "Dyeing Station",
 
 
 
@@ -33,9 +33,16 @@
   "advancements.fashion.rainbow_clothes.title" : "Colorful outfit",
   "advancements.fashion.rainbow_clothes.description" : "Make an outfit with all 16 dye colors!",
 
-  "advancements.fashion.dye_item.title" : "Dying to add color",
-  "advancements.fashion.dye_item.description" : "Give a piece of clothing a custom design",
+  "advancements.fashion.dye_item.title" : "Dyeing to add color",
+  "advancements.fashion.dye_item.description" : "Give a piece of clothing a custom design with a Dyeing Station",
 
   "advancements.fashion.dye_creeper_face.title" : "Hiss...",
-  "advancements.fashion.dye_creeper_face.description" : "Create a Creeper face design"
+  "advancements.fashion.dye_creeper_face.description" : "Create a Creeper face design",
+
+
+
+  "subtitles.ui.sewing_table.select_pattern" : "Fabric shuffling",
+  "subtitles.ui.sewing_table.take_result" : "Needles needling",
+
+  "subtitles.ui.dyeing_station.take_result" : "Fabric drying"
 }

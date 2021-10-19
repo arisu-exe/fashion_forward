@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "fashion_forward:dying_station"
+      "fashion_forward:dyeing_station"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "fashion_forward:dying_station"
+        "recipe": "fashion_forward:dyeing_station"
       }
     }
   },

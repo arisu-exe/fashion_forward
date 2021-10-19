@@ -1,0 +1,23 @@
+{
+  "ui.sewing_table.select_pattern" : {
+    "category" : "ui",
+    "subtitle" : "subtitles.ui.sewing_table.select_pattern",
+    "sounds" : [
+      "fashion_forward:ui/sewing_table/select_pattern"
+    ]
+  },
+  "ui.sewing_table.take_result" : {
+    "category" : "ui",
+    "subtitle" : "subtitles.ui.sewing_table.take_result",
+    "sounds" : [
+      "fashion_forward:ui/sewing_table/take_result"
+    ]
+  },
+  "ui.dyeing_station.take_result" : {
+    "category" : "ui",
+    "subtitle" : "subtitles.ui.dyeing_station.take_result",
+    "sounds" : [
+      "fashion_forward:ui/dyeing_station/take_result"
+    ]
+  }
+}

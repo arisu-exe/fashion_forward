@@ -1,6 +1,5 @@
 package io.github.fallOut015.fashion_forward.world.item;
 
-import net.minecraft.client.gui.screens.inventory.LoomScreen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
@@ -140,14 +139,38 @@ public class WearableItem extends Item {
             return null;
         }
     }
+    public static boolean hasDesign(ItemStack itemStack) {
+        return ((CompoundTag) itemStack.getOrCreateTag().get("data")).contains("design");
+    }
+    @Nullable
+    public static DyeColor getColorInDesignAtIndex(ItemStack itemStack, int index) {
+        int id;
+        if(index > 9) {
+            id = switch(((CompoundTag) itemStack.getOrCreateTag().get("data")).getString("design").charAt(index)) {
+                case 'A' -> 10;
+                case 'B' -> 11;
+                case 'C' -> 12;
+                case 'D' -> 13;
+                case 'E' -> 14;
+                case 'F' -> 15;
+                default -> -1;
+            };
+        } else {
+            id = Integer.valueOf(((CompoundTag) itemStack.getOrCreateTag().get("data")).getString("design").charAt(index));
+        }
+        if(id == -1) {
+            return null;
+        } else {
+            return DyeColor.byId(id);
+        }
+    }
+    public static float[] getRGBOfDec(int decimal) {
+        // Thanks Stefano Sanfilippo (://stackoverflow.com/questions/21222935/java-decimal-color-to-rgb-color)
+        float r = (float) ((decimal >> 16) % 255) / 255f;
+        float g = (float) ((decimal >> 8) % 255) / 255f;
+        float b = (float) (decimal % 255) / 255f;
+        return new float[] {
+            r, g, b
+        };
+    }
 }
-
-/*
-FORMATTED_DESIGN_STRING
-8x8 pixel art with any of the 16 dye colors and transparent
-64 digit heptadecimal
-0123456789ABCDEFG
-(each dye in order of enum + transparent at end (G))
-i.e.
-EEEEEEEE EGGGGGGE ... (ignore whitespace, it'll all be squished together when being written)
- */

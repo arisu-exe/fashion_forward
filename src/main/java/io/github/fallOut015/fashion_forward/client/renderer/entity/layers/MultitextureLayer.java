@@ -47,11 +47,10 @@ public class MultitextureLayer<T extends Player> extends RenderLayer<T, PlayerMo
         if(itemStack.is(this.item)) {
             int packedOverlay = 0;
             for(int i = 0; i < ((WearableItem) itemStack.getItem()).getPatternSlots(); ++ i) {
-                int dec = WearableItem.getDecimalFromDye(WearableItem.getColor(itemStack, i));
-                float r = (float) ((dec >> 16) % 255) / 255f;
-                float g = (float) ((dec >> 8) % 255) / 255f;
-                float b = (float) (dec % 255) / 255f;
-                // Thanks Stefano Sanfilippo (https://stackoverflow.com/questions/21222935/java-decimal-color-to-rgb-color)
+                float[] rgb = WearableItem.getRGBOfDec(WearableItem.getDecimalFromDye(WearableItem.getColor(itemStack, i)));
+                float r = rgb[0];
+                float g = rgb[1];
+                float b = rgb[2];
                 if(this.item.getEquipmentSlot().equals(EquipmentSlot.HEAD)) {
                     this.model.copyFrom(this.getParentModel().getHead());
                 }

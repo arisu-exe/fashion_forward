@@ -1,0 +1,7 @@
+{
+  "variants" : {
+    "" : {
+      "model" : "fashion_forward:block/dyeing_station"
+    }
+  }
+}

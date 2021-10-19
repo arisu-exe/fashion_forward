@@ -11,14 +11,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
 
-public class DyingStationMenu extends AbstractContainerMenu {
+public class DyeingStationMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     Runnable slotUpdateListener = () -> {
     };
@@ -27,51 +26,53 @@ public class DyingStationMenu extends AbstractContainerMenu {
     private final Container inputContainer = new SimpleContainer(65) {
         public void setChanged() {
             super.setChanged();
-            DyingStationMenu.this.slotsChanged(this);
-            DyingStationMenu.this.slotUpdateListener.run();
+            DyeingStationMenu.this.slotsChanged(this);
+            DyeingStationMenu.this.slotUpdateListener.run();
         }
     };
     private final Container outputContainer = new SimpleContainer(1) {
         public void setChanged() {
             super.setChanged();
-            DyingStationMenu.this.slotUpdateListener.run();
+            DyeingStationMenu.this.slotUpdateListener.run();
         }
     };
 
-    public DyingStationMenu(int containerId, Inventory inventory) {
+    public DyeingStationMenu(int containerId, Inventory inventory) {
         this(containerId, inventory, ContainerLevelAccess.NULL);
     }
 
-    public DyingStationMenu(int containerId, Inventory inventory, final ContainerLevelAccess containerLevelAccess) {
-        super(ContainersFashionForward.DYING_STATION.get(), containerId);
+    public DyeingStationMenu(int containerId, Inventory inventory, final ContainerLevelAccess containerLevelAccess) {
+        super(ContainersFashionForward.DYEING_STATION.get(), containerId);
         this.access = containerLevelAccess;
         this.inputSlots = new Slot[this.inputContainer.getContainerSize()];
-        this.inputSlots[0] = this.addSlot(new Slot(this.inputContainer, 0, 13, 26) {
+        this.inputSlots[0] = this.addSlot(new Slot(this.inputContainer, 0, 9, 69) {
             @Override
             public boolean mayPlace(ItemStack itemStack) {
                 return itemStack.getItem() instanceof WearableItem;
             }
         });
         for (int i = 1; i < this.inputSlots.length; ++i) {
-            this.inputSlots[i] = this.addSlot(new Slot(this.inputContainer, 0, 13 + (i % 8) * 20, 26 + ((i / 8) % 8) * 19) {
+            this.inputSlots[i] = this.addSlot(new Slot(this.inputContainer, i, 32 + (i % 8) * 18, 6 + ((i / 8) % 8) * 18) {
+                @Override
                 public boolean mayPlace(ItemStack itemStack) {
                     return itemStack.getItem() instanceof DyeItem;
                 }
             });
         }
 
-        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 143, 58) {
+        this.resultSlot = this.addSlot(new Slot(this.outputContainer, 0, 181, 69) {
+            @Override
             public boolean mayPlace(ItemStack itemStack) {
                 return false;
             }
-
+            @Override
             public void onTake(Player player, ItemStack itemStack) {
-                for (Slot inputSlot : DyingStationMenu.this.inputSlots) {
+                for (Slot inputSlot : DyeingStationMenu.this.inputSlots) {
                     inputSlot.remove(1);
                 }
 
                 containerLevelAccess.execute((level, blockPos) ->
-                    level.playSound((Player) null, blockPos, SoundEventsFashionForward.UI_DYING_STATION_TAKE_RESULT.get(), SoundSource.BLOCKS, 1.0F, 1.0F)
+                    level.playSound((Player) null, blockPos, SoundEventsFashionForward.UI_DYEING_STATION_TAKE_RESULT.get(), SoundSource.BLOCKS, 1.0F, 1.0F)
                 );
                 super.onTake(player, itemStack);
             }
@@ -79,18 +80,18 @@ public class DyingStationMenu extends AbstractContainerMenu {
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(inventory, j + i * 9 + 9, 23 + j * 18, 155 + i * 18));
             }
         }
 
         for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(inventory, k, 8 + k * 18, 142));
+            this.addSlot(new Slot(inventory, k, 23 + k * 18, 213));
         }
     }
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, BlocksFashionForward.DYING_STATION.get());
+        return stillValid(this.access, player, BlocksFashionForward.DYEING_STATION.get());
     }
 
     @Override
@@ -109,12 +110,29 @@ public class DyingStationMenu extends AbstractContainerMenu {
     }
     private void setupResultSlot() {
         String dyeData = "";
-        if(Arrays.stream(this.getDyeSlots()).allMatch(slot -> !slot.hasItem())) {
+        if(Arrays.stream(this.getDyeSlots()).allMatch(slot -> !slot.hasItem()) || !this.getWearableSlot().hasItem()) {
+            this.resultSlot.set(ItemStack.EMPTY);
             return;
         }
         for(Slot slot : this.getDyeSlots()) {
             char type = 'g';
-            // return a different letter for each color, g is for transparent
+            if(slot.hasItem()) {
+                DyeItem dye = (DyeItem) slot.getItem().getItem();
+                int id = dye.getDyeColor().getId();
+                if(id > 9) {
+                    type = switch(id) {
+                        case 10 -> 'A';
+                        case 11 -> 'B';
+                        case 12 -> 'C';
+                        case 13 -> 'D';
+                        case 14 -> 'E';
+                        case 15 -> 'F';
+                        default -> 'G';
+                    };
+                } else {
+                    type = String.valueOf(id).charAt(0);
+                }
+            }
             dyeData += type;
         }
         ItemStack result = this.getWearableSlot().getItem().copy();

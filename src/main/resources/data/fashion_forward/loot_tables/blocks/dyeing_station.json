@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "fashion_forward:dying_station"
+          "name": "fashion_forward:dyeing_station"
         }
       ],
       "conditions": [

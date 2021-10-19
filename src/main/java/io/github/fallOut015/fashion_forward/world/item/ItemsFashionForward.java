@@ -16,7 +16,7 @@ public class ItemsFashionForward {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MainFashionForward.MODID);
 
     public static final RegistryObject<Item> SEWING_TABLE = ITEMS.register("sewing_table", () -> new BlockItem(BlocksFashionForward.SEWING_TABLE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-    public static final RegistryObject<Item> DYING_STATION = ITEMS.register("dying_station", () -> new BlockItem(BlocksFashionForward.DYING_STATION.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> DYEING_STATION = ITEMS.register("dyeing_station", () -> new BlockItem(BlocksFashionForward.DYEING_STATION.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
     public static final RegistryObject<Item> TOP_HAT = ITEMS.register("top_hat", () -> new WearableItem(EquipmentSlot.HEAD, new DyeColor[] { DyeColor.BLACK, DyeColor.WHITE, DyeColor.BLACK }, new Item.Properties().tab(CreativeModeTabFashionForward.TAB_FASHION)));
     public static final RegistryObject<Item> HEADPHONES = ITEMS.register("headphones", () -> new WearableItem(EquipmentSlot.HEAD, new DyeColor[] { DyeColor.BLACK, DyeColor.BLACK, DyeColor.BLACK }, new Item.Properties().tab(CreativeModeTabFashionForward.TAB_FASHION)));

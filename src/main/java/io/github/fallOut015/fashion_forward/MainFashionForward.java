@@ -1,13 +1,14 @@
 package io.github.fallOut015.fashion_forward;
 
-import io.github.fallOut015.fashion_forward.client.gui.screens.inventory.DyingStationScreen;
+import io.github.fallOut015.fashion_forward.client.gui.screens.inventory.DyeingStationScreen;
 import io.github.fallOut015.fashion_forward.client.gui.screens.inventory.SewingTableScreen;
 import io.github.fallOut015.fashion_forward.sounds.SoundEventsFashionForward;
+import io.github.fallOut015.fashion_forward.tags.ItemTagsFashionForward;
 import io.github.fallOut015.fashion_forward.world.inventory.ContainersFashionForward;
-import io.github.fallOut015.fashion_forward.world.inventory.DyingStationMenu;
 import io.github.fallOut015.fashion_forward.world.item.ItemsFashionForward;
 import io.github.fallOut015.fashion_forward.world.level.block.BlocksFashionForward;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +18,6 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -50,7 +50,7 @@ public class MainFashionForward {
     private void client(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ContainersFashionForward.SEWING_TABLE.get(), SewingTableScreen::new);
-            MenuScreens.register(ContainersFashionForward.DYING_STATION.get(), DyingStationScreen::new);
+            MenuScreens.register(ContainersFashionForward.DYEING_STATION.get(), DyeingStationScreen::new);
         });
     }
 

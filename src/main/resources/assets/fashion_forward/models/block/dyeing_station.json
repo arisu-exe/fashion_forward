@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "top": "fashion_forward:block/dying_station_top",
+    "top": "fashion_forward:block/dyeing_station_top",
     "bottom": "minecraft:block/cobblestone",
-    "side": "fashion_forward:block/dying_station_side"
+    "side": "fashion_forward:block/dyeing_station_side"
   }
 }
