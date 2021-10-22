@@ -12,9 +12,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class DyeingStationMenu extends AbstractContainerMenu {
@@ -114,24 +116,17 @@ public class DyeingStationMenu extends AbstractContainerMenu {
             this.resultSlot.set(ItemStack.EMPTY);
             return;
         }
-        for(Slot slot : this.getDyeSlots()) {
+        for(int s = 0; s < this.getDyeSlots().length; ++ s) {
+            Slot slot = this.getDyeSlots()[s];
             char type = 'g';
-            if(slot.hasItem()) {
-                DyeItem dye = (DyeItem) slot.getItem().getItem();
-                int id = dye.getDyeColor().getId();
-                if(id > 9) {
-                    type = switch(id) {
-                        case 10 -> 'A';
-                        case 11 -> 'B';
-                        case 12 -> 'C';
-                        case 13 -> 'D';
-                        case 14 -> 'E';
-                        case 15 -> 'F';
-                        default -> 'G';
-                    };
-                } else {
-                    type = String.valueOf(id).charAt(0);
+            if(this.getWearableSlot().hasItem() && WearableItem.hasDesign(this.getWearableSlot().getItem())) {
+                @Nullable DyeColor color = WearableItem.getColorInDesignAtIndex(this.getWearableSlot().getItem(), s);
+                if(color != null) {
+                    type = WearableItem.dyeColorToChar(color);
                 }
+            }
+            if(slot.hasItem()) {
+                type = WearableItem.dyeColorToChar(((DyeItem) slot.getItem().getItem()).getDyeColor());
             }
             dyeData += type;
         }

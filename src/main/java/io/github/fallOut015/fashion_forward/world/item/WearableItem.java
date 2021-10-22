@@ -147,12 +147,12 @@ public class WearableItem extends Item {
         int id;
         if(index > 9) {
             id = switch(((CompoundTag) itemStack.getOrCreateTag().get("data")).getString("design").charAt(index)) {
-                case 'A' -> 10;
-                case 'B' -> 11;
-                case 'C' -> 12;
-                case 'D' -> 13;
-                case 'E' -> 14;
-                case 'F' -> 15;
+                case 'a' -> 10;
+                case 'b' -> 11;
+                case 'c' -> 12;
+                case 'd' -> 13;
+                case 'e' -> 14;
+                case 'f' -> 15;
                 default -> -1;
             };
         } else {
@@ -162,6 +162,22 @@ public class WearableItem extends Item {
             return null;
         } else {
             return DyeColor.byId(id);
+        }
+    }
+    public static char dyeColorToChar(DyeColor dyeColor) {
+        int id = dyeColor.getId();
+        if(id > 9) {
+            return switch(id) {
+                case 10 -> 'a';
+                case 11 -> 'b';
+                case 12 -> 'c';
+                case 13 -> 'd';
+                case 14 -> 'e';
+                case 15 -> 'f';
+                default -> 'g';
+            };
+        } else {
+            return String.valueOf(id).charAt(0);
         }
     }
     public static float[] getRGBOfDec(int decimal) {

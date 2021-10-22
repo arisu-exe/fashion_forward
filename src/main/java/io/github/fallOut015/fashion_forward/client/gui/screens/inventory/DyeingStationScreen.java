@@ -45,16 +45,18 @@ public class DyeingStationScreen extends AbstractContainerScreen<DyeingStationMe
         int i = this.leftPos;
         int j = this.topPos;
         this.blit(poseStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
-        
+
+        RenderSystem.enableBlend();
         if(this.menu.getWearableSlot().hasItem() && WearableItem.hasDesign(this.menu.getWearableSlot().getItem())) {
             for(int s = 0; s < this.menu.getDyeSlots().length; ++ s) {
                 if(WearableItem.getColorInDesignAtIndex(this.menu.getWearableSlot().getItem(), s) != null) {
                     BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
                     float[] rgb = WearableItem.getRGBOfDec(WearableItem.getDecimalFromDye(WearableItem.getColorInDesignAtIndex(this.menu.getWearableSlot().getItem(), s)));
-                    this.fillRect(bufferbuilder, this.menu.getDyeSlots()[s].x + i, this.menu.getDyeSlots()[s].y + j, (int) (18d * Minecraft.getInstance().getWindow().getGuiScale()), (int) (18d * Minecraft.getInstance().getWindow().getGuiScale()), (int) (rgb[0] * 255f), (int) (rgb[1] * 255f), (int) (rgb[2] * 255f), 128);
+                    this.fillRect(bufferbuilder, this.menu.getDyeSlots()[s].x + i, this.menu.getDyeSlots()[s].y + j, 16, 16, (int) (rgb[0] * 255f), (int) (rgb[1] * 255f), (int) (rgb[2] * 255f), 128);
                 }
             }
         }
+        RenderSystem.disableBlend();
 
         Lighting.setupForFlatItems();
 
